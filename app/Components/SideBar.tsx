@@ -21,11 +21,12 @@ import {
   Menu,
   Button,
   CardMedia,
+  Tooltip,
+  Zoom,
 } from "@mui/material";
 
 import {
   KeyboardDoubleArrowLeft,
-  AccountCircle,
   Help,
   MoreVert,
   Notifications,
@@ -37,8 +38,8 @@ import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
-//
 const drawerWidth = 200;
 
 const openedMixin = (theme: Theme): CSSObject => ({
@@ -161,6 +162,9 @@ export default function SideBar({ children }: { children: React.ReactNode }) {
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
+  //Active Link
+  const pathName = usePathname();
+
   const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -227,7 +231,7 @@ export default function SideBar({ children }: { children: React.ReactNode }) {
       }}
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
-      sx={{ top: "2.3rem" }}
+      sx={{ top: "2.3rem", display: { xs: "block", md: "none" } }}
     >
       <MenuItem>
         <Search sx={{ m: "0 !important" }}>
@@ -295,7 +299,7 @@ export default function SideBar({ children }: { children: React.ReactNode }) {
             onClick={handleDrawerOpen}
             edge="start"
             sx={{
-              marginRight: 5,
+              mr: 3,
               display: { xs: "none", sm: open ? "none" : "flex" },
               alignItems: "center",
             }}
@@ -436,7 +440,7 @@ export default function SideBar({ children }: { children: React.ReactNode }) {
             ".MuiListItem-root :hover": {
               color: "#FFD12E",
               "& svg": { color: "#FFD12E" },
-              bgcolor: "#FBCC2533",
+              bgcolor: "rgba(251, 204, 37, 0.1)",
               ".MuiListItemIcon-root, .MuiListItemText-root, span, svg, a": {
                 bgcolor: "unset",
               },
@@ -444,45 +448,59 @@ export default function SideBar({ children }: { children: React.ReactNode }) {
             "& a": {
               display: "flex",
             },
-            fontWeight: 800,
-            "&a.active": {
-              color: "#fff !important",
-              bgcolor: "#8731E8",
+            ".activeLink": {
+              color: "#FFD12E",
+              "& svg": { color: "#FFD12E" },
+              bgcolor: "#FBCC2533",
+              ".MuiListItemIcon-root, .MuiListItemText-root, span, svg, a": {
+                bgcolor: "unset",
+              },
             },
+            fontWeight: 800,
           }}
         >
-          {SideBarOptions.map((item, i) => (
-            <ListItem disablePadding sx={{ display: "block" }} key={i}>
-              <Link href={item.path}>
-                <ListItemButton
-                  sx={{
-                    minHeight: 48,
-                    justifyContent: open ? "initial" : "center",
-                    alignItems: "center",
-                    px: 1.4,
-                    width: "20px !important",
-                  }}
-                >
-                  <ListItemIcon
-                    sx={{
-                      minWidth: "0 !important",
-                      mr: open ? 1 : 0,
-                      justifyContent: "center",
-                    }}
+          {SideBarOptions.map((item, i) => {
+            const isActive = pathName.endsWith(item.path);
+            return (
+              <ListItem disablePadding sx={{ display: "block" }} key={i}>
+                <Link href={item.path} className={isActive ? "activeLink" : ""}>
+                  <Tooltip
+                    TransitionComponent={Zoom}
+                    title={!open && item.title}
+                    arrow
+                    placement="right"
                   >
-                    {item.icon}
-                  </ListItemIcon>
-                  <ListItemText
-                    primary={item.title}
-                    sx={{ opacity: open ? 1 : 0 }}
-                  />
-                </ListItemButton>
-              </Link>
-            </ListItem>
-          ))}
+                    <ListItemButton
+                      sx={{
+                        minHeight: 48,
+                        justifyContent: open ? "initial" : "center",
+                        alignItems: "center",
+                        px: 1.4,
+                        width: "20px !important",
+                      }}
+                    >
+                      <ListItemIcon
+                        sx={{
+                          minWidth: "0 !important",
+                          mr: open ? 1 : 0,
+                          justifyContent: "center",
+                        }}
+                      >
+                        {item.icon}
+                      </ListItemIcon>
+                      <ListItemText
+                        primary={item.title}
+                        sx={{ opacity: open ? 1 : 0 }}
+                      />
+                    </ListItemButton>
+                  </Tooltip>
+                </Link>
+              </ListItem>
+            );
+          })}
         </List>
       </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, px: 3, py: 1.4 }}>
+      <Box component="main" sx={{ flexGrow: 1, bgcolor: "#F4F4F4" }}>
         <DrawerHeader />
         {children}
       </Box>
@@ -508,8 +526,8 @@ const SideBarOptions = [
   },
   {
     icon: <Home />,
-    title: "Today's Schedule",
-    path: "/todaysSchedule",
+    title: "Today's Schedules",
+    path: "/todaysSchedules",
   },
   {
     icon: <Home />,
