@@ -2,16 +2,14 @@
 
 import React from "react";
 import {
-  alpha,
   Box,
   Button,
   FormControl,
   InputAdornment,
-  InputBase,
   MenuItem,
   Select,
   SelectChangeEvent,
-  styled,
+  TextField,
   Typography,
 } from "@mui/material";
 import {
@@ -19,56 +17,14 @@ import {
   KeyboardArrowDown,
   Refresh,
 } from "@mui/icons-material";
-import SearchIcon from "@mui/icons-material/Search";
-
-const Search = styled("div")(({ theme }) => ({
-  position: "relative",
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
-  "&:hover": {
-    backgroundColor: alpha(theme.palette.common.black, 0.05),
-  },
-  marginRight: theme.spacing(2),
-  marginLeft: 0,
-  width: "100%",
-  [theme.breakpoints.up("sm")]: {
-    marginLeft: theme.spacing(3),
-    width: "auto",
-  },
-  border: "solid .5px #ccc",
-  borderRadius: "5px",
-}));
-
-const SearchIconWrapper = styled("div")(({ theme }) => ({
-  padding: theme.spacing(1, 1),
-  height: "100%",
-  position: "absolute",
-  pointerEvents: "none",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: "inherit",
-  "& .MuiInputBase-input": {
-    padding: theme.spacing(1, 1, 1, 0),
-    paddingLeft: `calc(1em + ${theme.spacing(3)})`,
-    transition: theme.transitions.create("width"),
-    width: "100%",
-    [theme.breakpoints.up("md")]: {
-      width: "36ch",
-    },
-    border: "solid .5 #ccc",
-    borderRadius: "5px",
-    fontSize: "12px",
-  },
-}));
 
 export default function ManageStaffHeader() {
-  const [empType, setEmpType] = React.useState("");
+  const [month, setMonth] = React.useState("January");
+  const [dateFrom, setDateFrom] = React.useState("__-__-____");
+  const [dateTo, setDateTo] = React.useState("__-__-____");
 
   const handleChange = (event: SelectChangeEvent) => {
-    setEmpType(event.target.value);
+    setMonth(event.target.value);
   };
 
   return (
@@ -81,7 +37,7 @@ export default function ManageStaffHeader() {
       }}
     >
       <Box sx={{ display: "flex", alignItems: "center" }}>
-        <Typography>All Staff</Typography>
+        <Typography>Attendance History</Typography>
 
         <Button
           variant="contained"
@@ -97,44 +53,68 @@ export default function ManageStaffHeader() {
         >
           <Refresh sx={{ fontSize: "18px" }} />
         </Button>
-
-        <Search>
-          <SearchIconWrapper>
-            <SearchIcon />
-          </SearchIconWrapper>
-          <StyledInputBase
-            placeholder="Search for staff, machines, tasks etc."
-            inputProps={{ "aria-label": "search" }}
-          />
-        </Search>
       </Box>
 
-      <Box>
+      <Box sx={{ display: "flex" }}>
+        <Box sx={{ display: "flex" }}>
+          <TextField
+            label="Date From"
+            type="date"
+            color="warning"
+            value={dateFrom}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              setDateFrom(event.target.value);
+            }}
+          />
+
+          <TextField
+            label="Date To"
+            type="date"
+            color="warning"
+            value={dateTo}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              setDateTo(event.target.value);
+            }}
+            sx={{ ml: 1.4 }}
+          />
+        </Box>
+
         <FormControl
           sx={{
             minWidth: 90,
             bgcolor: "#F4F4F4",
             border: "0 !important",
-            mr: 1.4,
+            mx: 2,
           }}
         >
           <Select
-            value={empType}
+            value={month}
             onChange={handleChange}
+            color="warning"
             displayEmpty
             inputProps={{ "aria-label": "Without label" }}
             IconComponent={DownArrow}
             sx={{
               ".MuiSelect-select": {
                 pr: "0 !important",
-                py: "9.5px !important",
+                py: "16px !important",
               },
             }}
           >
-            <MenuItem value="">All Staff</MenuItem>
-            <MenuItem value="Manager">Manager</MenuItem>
-            <MenuItem value="Lead">Lead</MenuItem>
-            <MenuItem value="Emplyoee">Emplyoee</MenuItem>
+            <MenuItem value="">Overall</MenuItem>
+            <MenuItem value="January">January</MenuItem>
+            <MenuItem value="February">February</MenuItem>
+            <MenuItem value="March">March</MenuItem>
+            <MenuItem value="April">April</MenuItem>
+            <MenuItem value="May">May</MenuItem>
+            <MenuItem value="May">May</MenuItem>
+            <MenuItem value="June">June</MenuItem>
+            <MenuItem value="July">July</MenuItem>
+            <MenuItem value="August">August</MenuItem>
+            <MenuItem value="September">September</MenuItem>
+            <MenuItem value="October">October</MenuItem>
+            <MenuItem value="November">November</MenuItem>
+            <MenuItem value="December">December</MenuItem>
           </Select>
         </FormControl>
 

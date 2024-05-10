@@ -1,12 +1,12 @@
 import { Box, Container, Typography } from "@mui/material";
 import React from "react";
 
-export default function Report() {
+export default function ManageMachines() {
   return (
     <>
       <Box sx={{ bgcolor: "#fff", py: 1.8 }}>
         <Container maxWidth="xl">
-          <Typography>Report</Typography>
+          <Typography>Manage Machines</Typography>
         </Container>
       </Box>
     </>

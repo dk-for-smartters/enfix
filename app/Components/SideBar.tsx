@@ -460,10 +460,13 @@ export default function SideBar({ children }: { children: React.ReactNode }) {
           }}
         >
           {SideBarOptions.map((item, i) => {
-            const isActive = pathName.endsWith(item.path);
+            const isActive = pathName.endsWith(`${item.path}`);
             return (
               <ListItem disablePadding sx={{ display: "block" }} key={i}>
-                <Link href={item.path} className={isActive ? "activeLink" : ""}>
+                <Link
+                  href={`${item.path}`}
+                  className={isActive ? "activeLink" : ""}
+                >
                   <Tooltip
                     TransitionComponent={Zoom}
                     title={!open && item.title}
@@ -517,27 +520,27 @@ const SideBarOptions = [
   {
     icon: <Home />,
     title: "Manage Staff",
-    path: "/manageStaff",
+    path: "/manage-staff",
   },
   {
     icon: <Home />,
     title: "Manage Machines",
-    path: "/manageMachines",
+    path: "/manage-machines",
   },
   {
     icon: <Home />,
     title: "Today's Schedules",
-    path: "/todaysSchedules",
+    path: "/todays-schedules",
   },
   {
     icon: <Home />,
     title: "Upcoming Schedules",
-    path: "/upcomingSchedules",
+    path: "/upcomings-schedules",
   },
   {
     icon: <Home />,
     title: "Manage Inventory",
-    path: "/manageInventory",
+    path: "/manages-inventory",
   },
   {
     icon: <Home />,

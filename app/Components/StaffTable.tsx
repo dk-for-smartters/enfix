@@ -12,6 +12,7 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 interface Employee {
@@ -23,6 +24,8 @@ interface Employee {
 }
 
 export default function StaffTable() {
+  const router = useRouter();
+
   return (
     <Table>
       <TableHead>
@@ -90,6 +93,9 @@ export default function StaffTable() {
               </TableCell>
               <TableCell>
                 <Button
+                  onClick={() => {
+                    router.push(`/manage-staff/staff-details`);
+                  }}
                   variant="contained"
                   color="inherit"
                   sx={{
