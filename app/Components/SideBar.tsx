@@ -33,8 +33,14 @@ import {
   Home,
   BadgeRounded,
   Settings,
+  People,
+  PrecisionManufacturing,
+  Today,
+  Schedule,
+  Inventory,
+  Receipt,
+  Report,
 } from "@mui/icons-material";
-import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import Image from "next/image";
 import Link from "next/link";
@@ -82,14 +88,6 @@ const AppBar = styled(MuiAppBar, {
   transition: theme.transitions.create(["width", "margin"], {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
-  }),
-  ...(open && {
-    marginLeft: drawerWidth,
-    width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(["width", "margin"], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
   }),
 }));
 
@@ -233,17 +231,19 @@ export default function SideBar({ children }: { children: React.ReactNode }) {
       onClose={handleMobileMenuClose}
       sx={{ top: "2.3rem", display: { xs: "block", md: "none" } }}
     >
-      <MenuItem>
-        <Search sx={{ m: "0 !important" }}>
-          <SearchIconWrapper>
-            <SearchIcon />
-          </SearchIconWrapper>
-          <StyledInputBase
-            placeholder="Search for staff, machines, tasks etc."
-            inputProps={{ "aria-label": "search" }}
-          />
-        </Search>
-      </MenuItem>
+      {pathName === "/" && (
+        <MenuItem>
+          <Search sx={{ m: "0 !important" }}>
+            <SearchIconWrapper>
+              <SearchIcon />
+            </SearchIconWrapper>
+            <StyledInputBase
+              placeholder="Search for staff, machines, tasks etc."
+              inputProps={{ "aria-label": "search" }}
+            />
+          </Search>
+        </MenuItem>
+      )}
 
       <MenuItem>
         <Badge
@@ -289,38 +289,14 @@ export default function SideBar({ children }: { children: React.ReactNode }) {
       <CssBaseline />
       <AppBar
         position="fixed"
-        open={open}
-        sx={{ boxShadow: "none", bgcolor: "#fff", color: "#111" }}
+        sx={{
+          boxShadow: "none",
+          bgcolor: "#fff",
+          color: "#111",
+          width: open ? `calc(100% - ${drawerWidth}px)` : `calc(100% - 48.5px)`,
+        }}
       >
         <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            sx={{
-              mr: 3,
-              display: { xs: "none", sm: open ? "none" : "flex" },
-              alignItems: "center",
-            }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Image
-            src="/Logo.svg"
-            alt=""
-            height={1}
-            width={1}
-            style={{
-              width: "32px",
-              height: "32px",
-              backgroundColor: "#373737",
-              marginRight: "14px",
-              padding: "3px",
-              borderRadius: "10px",
-              display: open ? "none" : "block",
-            }}
-          />
           <Typography
             noWrap
             fontWeight={700}
@@ -330,15 +306,17 @@ export default function SideBar({ children }: { children: React.ReactNode }) {
             Wonderlaa Park
           </Typography>
 
-          <Search sx={{ display: { md: "block", xs: "none" } }}>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search for staff, machines, tasks etc."
-              inputProps={{ "aria-label": "search" }}
-            />
-          </Search>
+          {pathName === "/" && (
+            <Search sx={{ display: { md: "block", xs: "none" } }}>
+              <SearchIconWrapper>
+                <SearchIcon />
+              </SearchIconWrapper>
+              <StyledInputBase
+                placeholder="Search for staff, machines, tasks etc."
+                inputProps={{ "aria-label": "search" }}
+              />
+            </Search>
+          )}
 
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
@@ -402,30 +380,27 @@ export default function SideBar({ children }: { children: React.ReactNode }) {
         open={open}
         sx={{ ".MuiPaper-root": { bgcolor: "#373737" } }}
       >
-        <DrawerHeader sx={{ bgcolor: "#373737", px: 1.4 }}>
+        <DrawerHeader sx={{ bgcolor: "#373737", px: { sm: 1.4, xs: 1 } }}>
+          <Box sx={{ display: "flex" }} onClick={handleDrawerOpen}>
+            <Image
+              src="/Logo.svg"
+              alt=""
+              width={1}
+              height={1}
+              style={{ width: "25px", height: "fit-content" }}
+            />
+
+            {open && (
+              <Typography ml={1} fontWeight={700} color="white" fontSize="20px">
+                ENFIX
+              </Typography>
+            )}
+          </Box>
+
           {open && (
-            <>
-              <Box display="flex">
-                <Image
-                  src="/Logo.svg"
-                  alt=""
-                  width={1}
-                  height={1}
-                  style={{ width: "25px", height: "fit-content" }}
-                />
-                <Typography
-                  ml={1}
-                  fontWeight={700}
-                  color="white"
-                  fontSize="20px"
-                >
-                  ENFIX
-                </Typography>
-              </Box>
-              <IconButton onClick={handleDrawerClose}>
-                <KeyboardDoubleArrowLeft sx={{ color: "#FFD12E" }} />
-              </IconButton>
-            </>
+            <IconButton onClick={handleDrawerClose}>
+              <KeyboardDoubleArrowLeft sx={{ color: "#FFD12E" }} />
+            </IconButton>
           )}
         </DrawerHeader>
         <List
@@ -518,37 +493,37 @@ const SideBarOptions = [
     path: "/",
   },
   {
-    icon: <Home />,
+    icon: <People />,
     title: "Manage Staff",
     path: "/manage-staff",
   },
   {
-    icon: <Home />,
+    icon: <PrecisionManufacturing />,
     title: "Manage Machines",
     path: "/manage-machines",
   },
   {
-    icon: <Home />,
+    icon: <Today />,
     title: "Today's Schedules",
     path: "/todays-schedules",
   },
   {
-    icon: <Home />,
+    icon: <Schedule />,
     title: "Upcoming Schedules",
     path: "/upcomings-schedules",
   },
   {
-    icon: <Home />,
+    icon: <Inventory />,
     title: "Manage Inventory",
     path: "/manages-inventory",
   },
   {
-    icon: <Home />,
+    icon: <Receipt />,
     title: "Invoices",
     path: "/invoices",
   },
   {
-    icon: <Home />,
+    icon: <Report />,
     title: "Report",
     path: "/report",
   },

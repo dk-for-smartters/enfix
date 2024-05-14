@@ -21,7 +21,6 @@ export default function StaffDetailsSideBar() {
     <Box
       sx={{
         minWidth: "max-content",
-        minHeight: "-webkit-fill-available",
         maxHeight: "100vh",
         bgcolor: "#fff",
         borderRadius: "10px",

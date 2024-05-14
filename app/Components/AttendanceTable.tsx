@@ -22,13 +22,11 @@ interface Attendance {
 
 export default function AttendanceTable() {
   return (
-    <Table>
+    <Table stickyHeader>
       <TableHead>
         <TableRow
           sx={{
-            bgcolor: "#373737",
-            color: "#fff",
-            ".MuiTableCell-root": { bgcolor: "unset", color: "unset" },
+            ".MuiTableCell-root": { bgcolor: "#373737", color: "#fff" },
           }}
         >
           <TableCell>Date</TableCell>

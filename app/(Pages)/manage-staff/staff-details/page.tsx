@@ -14,6 +14,8 @@ export default function StaffDetails() {
         width: "-webkit-fill-available",
         ml: 3,
         borderRadius: "10px",
+        maxHeight: "100vh",
+        overflow: "auto",
       }}
     >
       <Box

@@ -19,13 +19,11 @@ interface Trancations {
 
 export default function SubscriptionTable() {
   return (
-    <Table>
+    <Table stickyHeader>
       <TableHead>
         <TableRow
           sx={{
-            ".MuiTableCell-root": { bgcolor: "unset", color: "unset" },
-            bgcolor: "#373737",
-            color: "#fff",
+            ".MuiTableCell-root": { bgcolor: "#373737", color: "#fff" },
           }}
         >
           <TableCell>Txn ID</TableCell>

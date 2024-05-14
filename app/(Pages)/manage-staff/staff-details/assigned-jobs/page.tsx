@@ -8,10 +8,12 @@ export default function AssignedJobs() {
     <Card
       sx={{
         boxShadow: "none",
-        minHeight: "100vh",
         width: "-webkit-fill-available",
         ml: 3,
         borderRadius: "10px",
+        minHeight: "100vh",
+        maxHeight: "100vh",
+        overflow: "auto",
       }}
     >
       <Box

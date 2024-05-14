@@ -14,6 +14,8 @@ export default function SubscriptionHistory() {
         ml: 3,
         borderRadius: "10px",
         minHeight: "100vh",
+        maxHeight: "100vh",
+        overflow: "auto",
       }}
     >
       <SubscriptionHistoryHeader />
