@@ -19,11 +19,11 @@ interface Employee {
   id: number;
   image: string;
   name: string;
-  email: string;
+  modelNum: string;
   status: string;
 }
 
-export default function StaffTable() {
+export default function MachineTable() {
   const router = useRouter();
 
   return (
@@ -36,8 +36,8 @@ export default function StaffTable() {
         >
           <TableCell>ID</TableCell>
           <TableCell>Image</TableCell>
-          <TableCell>Employee Name</TableCell>
-          <TableCell>Email</TableCell>
+          <TableCell>Name of Machine</TableCell>
+          <TableCell>Model No.</TableCell>
           <TableCell>License</TableCell>
           <TableCell>Action</TableCell>
         </TableRow>
@@ -57,7 +57,7 @@ export default function StaffTable() {
                 />
               </TableCell>
               <TableCell>{emp.name}</TableCell>
-              <TableCell>{emp.email}</TableCell>
+              <TableCell>{emp.modelNum}</TableCell>
               <TableCell>
                 <Box sx={{ display: "flex" }}>
                   <Typography
@@ -94,7 +94,7 @@ export default function StaffTable() {
               <TableCell>
                 <Button
                   onClick={() => {
-                    router.push(`/manage-staff/staff-details`);
+                    router.push(`/manage-machines/machine-details`);
                   }}
                   variant="contained"
                   color="inherit"
@@ -125,99 +125,99 @@ const empData: Employee[] = [
   {
     id: 1,
     image: "/emp.jpg",
-    name: "Employee Name",
-    email: "dk@dk.com",
+    name: "Roller Coaster 1",
+    modelNum: "Jaguar 34343",
     status: "Active",
   },
   {
     id: 2,
     image: "/emp.jpg",
-    name: "Employee Name",
-    email: "dk@dk.com",
-    status: "Active",
+    name: "Roller Coaster 1",
+    modelNum: "Jaguar 34343",
+    status: "Deleting in 20 Days",
   },
   {
     id: 3,
     image: "/emp.jpg",
-    name: "Employee Name",
-    email: "dk@dk.com",
-    status: "Active",
+    name: "Roller Coaster 1",
+    modelNum: "Jaguar 34343",
+    status: "Expiring in 29 Days",
   },
   {
     id: 4,
     image: "/emp.jpg",
-    name: "Employee Name",
-    email: "dk@dk.com",
-    status: "Active",
+    name: "Roller Coaster 1",
+    modelNum: "Jaguar 34343",
+    status: "Expired Today",
   },
   {
     id: 5,
     image: "/emp.jpg",
-    name: "Employee Name",
-    email: "dk@dk.com",
+    name: "Roller Coaster 1",
+    modelNum: "Jaguar 34343",
     status: "Active",
   },
   {
     id: 6,
     image: "/emp.jpg",
-    name: "Employee Name",
-    email: "dk@dk.com",
+    name: "Roller Coaster 1",
+    modelNum: "Jaguar 34343",
     status: "Active",
   },
   {
     id: 7,
     image: "/emp.jpg",
-    name: "Employee Name",
-    email: "dk@dk.com",
+    name: "Roller Coaster 1",
+    modelNum: "Jaguar 34343",
     status: "Active",
   },
   {
     id: 8,
     image: "/emp.jpg",
-    name: "Employee Name",
-    email: "dk@dk.com",
-    status: "Deleting in 20 Days",
+    name: "Roller Coaster 1",
+    modelNum: "Jaguar 34343",
+    status: "Active",
   },
   {
     id: 9,
     image: "/emp.jpg",
-    name: "Employee Name",
-    email: "dk@dk.com",
-    status: "Deleting in 20 Days",
+    name: "Roller Coaster 1",
+    modelNum: "Jaguar 34343",
+    status: "Active",
   },
   {
     id: 10,
     image: "/emp.jpg",
-    name: "Employee Name",
-    email: "dk@dk.com",
-    status: "Expired Today",
+    name: "Roller Coaster 1",
+    modelNum: "Jaguar 34343",
+    status: "Active",
   },
   {
     id: 11,
     image: "/emp.jpg",
-    name: "Employee Name",
-    email: "dk@dk.com",
-    status: "Expired Today",
+    name: "Roller Coaster 1",
+    modelNum: "Jaguar 34343",
+    status: "Active",
   },
   {
     id: 12,
     image: "/emp.jpg",
-    name: "Employee Name",
-    email: "dk@dk.com",
-    status: "Expiring in 29 Days",
+    name: "Roller Coaster 1",
+    modelNum: "Jaguar 34343",
+    status: "Active",
   },
   {
     id: 13,
     image: "/emp.jpg",
-    name: "Employee Name",
-    email: "dk@dk.com",
+    name: "Roller Coaster 1",
+    modelNum: "Jaguar 34343",
     status: "Active",
   },
   {
     id: 14,
     image: "/emp.jpg",
-    name: "Employee Name",
-    email: "dk@dk.com",
-    status: "Deleting in 20 Days",
+    name: "Roller Coaster 1",
+    modelNum: "Jaguar 34343",
+    status: "Expiring in 20 Days",
   },
 ];

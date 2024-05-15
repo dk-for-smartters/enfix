@@ -43,7 +43,7 @@ const initialUserData: UserData = {
   empEmail: "dinesh.kriplani20@smartters.in",
 };
 
-export default function AddNewStaffBtn() {
+export default function AddNewMachineBtn() {
   const [open, setOpen] = useState(false);
   const [userData, setUserData] = useState<UserData>(initialUserData);
   const [activeStep, setActiveStep] = useState(0);
@@ -107,7 +107,7 @@ export default function AddNewStaffBtn() {
         }}
         onClick={handleOpen}
       >
-        <Add fontSize="small" sx={{ mr: 1 }} /> Add New Staff
+        <Add fontSize="small" sx={{ mr: 1 }} /> Add New Machine
       </Button>
 
       <Dialog
@@ -213,7 +213,7 @@ export default function AddNewStaffBtn() {
                     overflow: "auto",
                   }}
                 >
-                  <ImgUploader caption="Click on this box to upload image of staff" />
+                  <ImgUploader caption="Click or Drag on this box to upload image of item" />
                 </Box>
 
                 <Box sx={{ my: 3.2, width: "100%" }}>

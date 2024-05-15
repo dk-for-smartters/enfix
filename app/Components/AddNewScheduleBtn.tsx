@@ -19,16 +19,11 @@ import {
   InputAdornment,
   InputLabel,
   OutlinedInput,
-  Step,
-  StepLabel,
-  Stepper,
   TextField,
   Typography,
 } from "@mui/material";
 
 import React, { useState } from "react";
-import ImgUploader from "./ImgUploader";
-import Permissions from "./Permissions";
 import SubscriptionStep from "./SubscriptionStep";
 
 interface UserData {
@@ -43,7 +38,7 @@ const initialUserData: UserData = {
   empEmail: "dinesh.kriplani20@smartters.in",
 };
 
-export default function AddNewStaffBtn() {
+export default function AddNewScheduleBtn() {
   const [open, setOpen] = useState(false);
   const [userData, setUserData] = useState<UserData>(initialUserData);
   const [activeStep, setActiveStep] = useState(0);
@@ -97,17 +92,16 @@ export default function AddNewStaffBtn() {
   return (
     <Box>
       <Button
-        variant="contained"
+        variant="outlined"
         color="inherit"
         sx={{
           textTransform: "capitalize",
-          bgcolor: "#373737",
-          color: "#fff",
-          ":hover": { color: "#000" },
+          border: "solid 1px #373737",
+          ":hover": { color: "#fff", bgcolor: "#373737" },
         }}
         onClick={handleOpen}
       >
-        <Add fontSize="small" sx={{ mr: 1 }} /> Add New Staff
+        <Add fontSize="small" sx={{ mr: 1 }} /> Add New Schedule
       </Button>
 
       <Dialog
@@ -125,26 +119,6 @@ export default function AddNewStaffBtn() {
           onSubmit={(e) => {
             e.preventDefault();
             // API
-
-            let errors: string[] = [];
-
-            if (password.length <= 5 && confirmPassword.length <= 5) {
-              errors.push(
-                "Password & Confirm password must be longer than 5 characters."
-              );
-            }
-
-            if (password !== confirmPassword) {
-              errors.push("Passwords do not match.");
-            }
-
-            if (errors.length > 0) {
-              setError(errors.join(" "));
-            } else {
-              console.log("Passwords Matched.");
-              handleNext();
-              setError("");
-            }
 
             if (activeStep === steps.length) {
               handleClose();
@@ -175,164 +149,122 @@ export default function AddNewStaffBtn() {
             </IconButton>
           </Box>
 
-          {activeStep < 2 && (
-            <Box sx={{ pb: 1 }}>
-              <Stepper activeStep={activeStep} alternativeLabel>
-                {steps.map((step, i) => {
-                  const stepProps: { completed?: boolean } = {};
-                  const labelProps: {
-                    optional?: React.ReactNode;
-                  } = {};
-
-                  return (
-                    <Step key={i} {...stepProps}>
-                      <StepLabel {...labelProps}>
-                        <Typography>{step.title}</Typography>
-                        <Typography variant="caption">
-                          {step.subtitle}
-                        </Typography>
-                      </StepLabel>
-                    </Step>
-                  );
-                })}
-              </Stepper>
-            </Box>
-          )}
-
           <Box sx={{ overflow: "auto", maxHeight: "64vh" }}>
-            {activeStep === 0 && (
-              <>
-                <Box
-                  sx={{
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    mt: 1,
-                    width: "100%",
-                    overflow: "auto",
-                  }}
-                >
-                  <ImgUploader caption="Click on this box to upload image of staff" />
-                </Box>
-
-                <Box sx={{ my: 3.2, width: "100%" }}>
-                  <TextField
-                    label="Name"
-                    variant="outlined"
-                    value={userData.empName}
-                    fullWidth
-                    color="warning"
-                    size="small"
-                    onChange={(e) => handleInputChange(e, "empName")}
-                  />
-
-                  <TextField
-                    type="tel"
-                    label="Phone"
-                    variant="outlined"
-                    value={userData.empPhone}
-                    color="warning"
-                    size="small"
-                    fullWidth
-                    onChange={(e) => handleInputChange(e, "empPhone")}
-                    sx={{ my: 3 }}
-                  />
-
-                  <TextField
-                    type="email"
-                    label="Email ID"
-                    variant="outlined"
-                    value={userData.empEmail}
-                    color="warning"
-                    size="small"
-                    fullWidth
-                    onChange={(e) => handleInputChange(e, "empEmail")}
-                  />
-
-                  <FormControl
-                    sx={{ my: 3 }}
-                    variant="outlined"
-                    color="warning"
-                    size="small"
-                    fullWidth
-                  >
-                    <InputLabel htmlFor="outlined-adornment-password">
-                      Password
-                    </InputLabel>
-                    <OutlinedInput
-                      id="outlined-adornment-password"
-                      type={viewPassword ? "text" : "password"}
-                      value={password}
-                      onChange={handlePasswordChange}
-                      endAdornment={
-                        <InputAdornment position="end">
-                          <IconButton
-                            aria-label="toggle password visibility"
-                            onClick={() => setViewPassword(!viewPassword)}
-                            edge="end"
-                          >
-                            {viewPassword ? <VisibilityOff /> : <Visibility />}
-                          </IconButton>
-                        </InputAdornment>
-                      }
-                      label="Password"
-                    />
-                  </FormControl>
-
-                  <FormControl
-                    variant="outlined"
-                    color="warning"
-                    size="small"
-                    fullWidth
-                    error={!!error}
-                  >
-                    <InputLabel htmlFor="outlined-adornment-confirm-password">
-                      Confirm Password
-                    </InputLabel>
-                    <OutlinedInput
-                      id="outlined-adornment-confirm-password"
-                      type={viewPassword ? "text" : "password"}
-                      value={confirmPassword}
-                      onChange={handleConfirmPasswordChange}
-                      endAdornment={
-                        <InputAdornment position="end">
-                          <IconButton
-                            aria-label="toggle confirm password visibility"
-                            onClick={() => setViewPassword(!viewPassword)}
-                            edge="end"
-                          >
-                            {viewPassword ? <VisibilityOff /> : <Visibility />}
-                          </IconButton>
-                        </InputAdornment>
-                      }
-                      label="Confirm Password"
-                    />
-                    {error && <FormHelperText>{error}</FormHelperText>}
-                  </FormControl>
-                </Box>
-
-                <Permissions title="Set Access" />
-
-                <Button
+            <>
+              <Box sx={{ my: 3.2, width: "100%" }}>
+                <TextField
+                  label="Name"
+                  variant="outlined"
+                  value={userData.empName}
                   fullWidth
-                  type="submit"
-                  variant="contained"
-                  color="inherit"
-                  sx={{
-                    my: 2,
-                    bgcolor: "#373737",
-                    color: "#FFF",
-                    textTransform: "capitalize",
-                    ":hover": {
-                      color: "#000",
-                    },
-                  }}
+                  color="warning"
+                  size="small"
+                  onChange={(e) => handleInputChange(e, "empName")}
+                />
+
+                <TextField
+                  type="tel"
+                  label="Phone"
+                  variant="outlined"
+                  value={userData.empPhone}
+                  color="warning"
+                  size="small"
+                  fullWidth
+                  onChange={(e) => handleInputChange(e, "empPhone")}
+                  sx={{ my: 3 }}
+                />
+
+                <TextField
+                  type="email"
+                  label="Email ID"
+                  variant="outlined"
+                  value={userData.empEmail}
+                  color="warning"
+                  size="small"
+                  fullWidth
+                  onChange={(e) => handleInputChange(e, "empEmail")}
+                />
+
+                <FormControl
+                  sx={{ my: 3 }}
+                  variant="outlined"
+                  color="warning"
+                  size="small"
+                  fullWidth
                 >
-                  Add Staff
-                </Button>
-              </>
-            )}
+                  <InputLabel htmlFor="outlined-adornment-password">
+                    Password
+                  </InputLabel>
+                  <OutlinedInput
+                    id="outlined-adornment-password"
+                    type={viewPassword ? "text" : "password"}
+                    value={password}
+                    onChange={handlePasswordChange}
+                    endAdornment={
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="toggle password visibility"
+                          onClick={() => setViewPassword(!viewPassword)}
+                          edge="end"
+                        >
+                          {viewPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                      </InputAdornment>
+                    }
+                    label="Password"
+                  />
+                </FormControl>
+
+                <FormControl
+                  variant="outlined"
+                  color="warning"
+                  size="small"
+                  fullWidth
+                  error={!!error}
+                >
+                  <InputLabel htmlFor="outlined-adornment-confirm-password">
+                    Confirm Password
+                  </InputLabel>
+                  <OutlinedInput
+                    id="outlined-adornment-confirm-password"
+                    type={viewPassword ? "text" : "password"}
+                    value={confirmPassword}
+                    onChange={handleConfirmPasswordChange}
+                    endAdornment={
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="toggle confirm password visibility"
+                          onClick={() => setViewPassword(!viewPassword)}
+                          edge="end"
+                        >
+                          {viewPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                      </InputAdornment>
+                    }
+                    label="Confirm Password"
+                  />
+                  {error && <FormHelperText>{error}</FormHelperText>}
+                </FormControl>
+              </Box>
+
+              <Button
+                fullWidth
+                type="submit"
+                variant="contained"
+                color="inherit"
+                sx={{
+                  my: 2,
+                  bgcolor: "#373737",
+                  color: "#FFF",
+                  textTransform: "capitalize",
+                  ":hover": {
+                    color: "#000",
+                  },
+                }}
+              >
+                Add Staff
+              </Button>
+            </>
 
             {activeStep === 1 && !autoSubscribe && (
               <>

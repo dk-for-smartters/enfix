@@ -1,6 +1,5 @@
 "use client";
 
-import { KeyboardArrowRight } from "@mui/icons-material";
 import {
   Box,
   Button,

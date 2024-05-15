@@ -2,9 +2,17 @@
 
 import React, { useState } from "react";
 import { Button, Typography } from "@mui/material";
-import { CameraAlt, Close } from "@mui/icons-material";
+import { CameraAlt } from "@mui/icons-material";
 
-export default function ImageUploader() {
+export default function ImageUploader({
+  borderRadius,
+  multiple,
+  caption,
+}: {
+  borderRadius?: string;
+  multiple?: boolean;
+  caption: string;
+}) {
   const [imageUrl, setImageUrl] = useState<string | null>(null);
 
   const uploadImage = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -46,7 +54,7 @@ export default function ImageUploader() {
           width: "200px",
           height: "200px",
           padding: imageUrl ? "5px" : "32px 16px",
-          borderRadius: "50%",
+          borderRadius: borderRadius ? borderRadius : "50%",
           backgroundColor: "#fffbed",
           border: "dashed #dbb11c 1px",
           display: "flex",
@@ -65,6 +73,7 @@ export default function ImageUploader() {
           accept="image/*"
           hidden
           onChange={uploadImage}
+          multiple={multiple ? true : false}
         />
 
         <div
@@ -80,7 +89,8 @@ export default function ImageUploader() {
             alignItems: "center",
             justifyContent: "center",
             textAlign: "center",
-            backgroundImage: imageUrl ? `url(${imageUrl})` : "none",
+            backgroundImage:
+              !multiple && imageUrl ? `url(${imageUrl})` : "none",
           }}
         >
           {!imageUrl && (
@@ -88,7 +98,7 @@ export default function ImageUploader() {
               <CameraAlt sx={{ color: "#DBB11C" }} />
               <Typography>Click / Drop to Upload</Typography>
               <Typography variant="caption" color="#373737" fontSize="10px">
-                Click on this div or drag the image of the logo.
+                {caption}
               </Typography>
             </>
           )}

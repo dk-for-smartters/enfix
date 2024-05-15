@@ -64,11 +64,11 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function ManageStaffHeader() {
-  const [empType, setEmpType] = useState("");
+export default function ManageMachinesHeader() {
+  const [machineType, setMachineType] = useState("");
 
   const handleChange = (event: SelectChangeEvent) => {
-    setEmpType(event.target.value);
+    setMachineType(event.target.value);
   };
 
   return (
@@ -81,7 +81,7 @@ export default function ManageStaffHeader() {
       }}
     >
       <Box sx={{ display: "flex", alignItems: "center" }}>
-        <Typography>All Staff</Typography>
+        <Typography>All Machines</Typography>
 
         <Button
           variant="contained"
@@ -103,7 +103,7 @@ export default function ManageStaffHeader() {
             <SearchIcon />
           </SearchIconWrapper>
           <StyledInputBase
-            placeholder="Search for staff, machines, tasks etc."
+            placeholder="Type name to Search"
             inputProps={{ "aria-label": "search" }}
           />
         </Search>
@@ -119,7 +119,7 @@ export default function ManageStaffHeader() {
           }}
         >
           <Select
-            value={empType}
+            value={machineType}
             onChange={handleChange}
             displayEmpty
             inputProps={{ "aria-label": "Without label" }}
@@ -131,10 +131,9 @@ export default function ManageStaffHeader() {
               },
             }}
           >
-            <MenuItem value="">All Staff</MenuItem>
-            <MenuItem value="Manager">Manager</MenuItem>
-            <MenuItem value="Lead">Lead</MenuItem>
-            <MenuItem value="Emplyoee">Emplyoee</MenuItem>
+            <MenuItem value="">All Machines</MenuItem>
+            <MenuItem value="Manager">Roller Coaster</MenuItem>
+            <MenuItem value="Lead">Spin Tora</MenuItem>
           </Select>
         </FormControl>
 
